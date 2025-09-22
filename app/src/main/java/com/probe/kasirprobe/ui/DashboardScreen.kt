@@ -1,5 +1,6 @@
 package com.probe.kasirprobe.ui
 
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -32,4 +33,13 @@ fun DashboardScreen(onTambahProduk: () -> Unit, onLihatProduk: () -> Unit) {
             Text("Lihat Daftar Produk")
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DashboardScreenPreview() {
+    DashboardScreen(
+        onTambahProduk = {},
+        onLihatProduk = {}
+    )
 }

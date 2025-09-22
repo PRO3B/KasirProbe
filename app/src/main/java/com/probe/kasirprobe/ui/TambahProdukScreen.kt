@@ -1,5 +1,6 @@
 package com.probe.kasirprobe.ui
 
+import androidx.compose.ui.tooling.preview.Preview
 import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -66,6 +67,35 @@ fun TambahProdukScreen(onBack: () -> Unit) {
         Spacer(modifier = Modifier.height(12.dp))
 
         Button(onClick = onBack) {
+            Text("Kembali")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TambahProdukScreenPreview() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        verticalArrangement = Arrangement.Top
+    ) {
+        OutlinedTextField(value = "Contoh Nama", onValueChange = {}, label = { Text("Nama Produk") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = "10000", onValueChange = {}, label = { Text("Harga") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = "5", onValueChange = {}, label = { Text("Stok") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = "Minuman", onValueChange = {}, label = { Text("Kategori") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = "1234567890", onValueChange = {}, label = { Text("Barcode") }, modifier = Modifier.fillMaxWidth())
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = {}) {
+            Text("Simpan Produk")
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Button(onClick = {}) {
             Text("Kembali")
         }
     }

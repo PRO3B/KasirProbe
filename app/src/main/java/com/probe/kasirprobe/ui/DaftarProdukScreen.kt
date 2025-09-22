@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.probe.kasirprobe.viewmodel.ProdukViewModel
@@ -109,4 +110,10 @@ fun DaftarProdukScreen(onBack: () -> Unit) {
             Text("Kembali")
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DaftarProdukScreenPreview() {
+    DaftarProdukScreen(onBack = {})
 }
