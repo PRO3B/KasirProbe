@@ -27,17 +27,19 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.probe.kasirprobe.ui.theme.KasirProbeTheme
-import androidx.compose.ui.text.input.KeyboardOptions
-import androidx.compose.ui.text.input.KeyboardType
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,28 +55,36 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun KasirProbeApp() {
     val navController = rememberNavController()
-    Scaffold(
-        bottomBar = { BottomNavigationBar(navController) }
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = BottomNavItem.Home.route,
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            composable("addProduct") {
-                AddProductScreen(navController = navController)
-            }
-            composable(BottomNavItem.Home.route) {
-                HomeScreen(navController = navController)
-            }
-            composable(BottomNavItem.Inventory.route) { InventoryScreen() }
-            composable(BottomNavItem.Pay.route) { PayScreen() }
-            composable(BottomNavItem.Laporan.route) { LaporanScreen() }
-            composable(BottomNavItem.Setting.route) { SettingScreen() }
 
-            // Tambahan untuk menu dashboard
-            composable("hutang") { HutangScreen() }
-            composable("labarugi") { LabaRugiScreen() }
+    // Untuk handle experimental API
+    CompositionLocalProvider(
+        LocalMinimumInteractiveComponentEnforcement provides false
+    ) {
+        Scaffold(
+            bottomBar = { BottomNavigationBar(navController) }
+        ) { innerPadding ->
+            NavHost(
+                navController = navController,
+                startDestination = BottomNavItem.Home.route,
+                modifier = Modifier.padding(innerPadding)
+            ) {
+                composable("addProduct") {
+                    AddProductScreen(navController = navController)
+                }
+                composable(BottomNavItem.Home.route) {
+                    HomeScreen(navController = navController)
+                }
+                composable(BottomNavItem.Inventory.route) {
+                    InventoryScreen(navController = navController)
+                }
+                composable(BottomNavItem.Pay.route) { PayScreen() }
+                composable(BottomNavItem.Laporan.route) { LaporanScreen() }
+                composable(BottomNavItem.Setting.route) { SettingScreen() }
+
+                // Tambahan untuk menu dashboard
+                composable("hutang") { HutangScreen() }
+                composable("labarugi") { LabaRugiScreen() }
+            }
         }
     }
 }
@@ -88,6 +98,7 @@ sealed class BottomNavItem(val route: String, val label: String) {
     object Setting : BottomNavItem("setting", "Setting")
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
@@ -384,6 +395,7 @@ fun NotificationIcon(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     query: String,
@@ -581,21 +593,21 @@ fun AddProductScreen(
                 value = cost,
                 onValueChange = { cost = it },
                 label = { Text("Harga Dasar") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                keyboardOptions = androidx.compose.ui.text.input.KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
                 value = price,
                 onValueChange = { price = it },
                 label = { Text("Harga Jual") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                keyboardOptions = androidx.compose.ui.text.input.KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
                 value = stock,
                 onValueChange = { stock = it },
                 label = { Text("Stok") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                keyboardOptions = androidx.compose.ui.text.input.KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
@@ -652,7 +664,8 @@ fun AddProductScreen(
 @Composable
 fun PreviewInventoryScreen() {
     KasirProbeTheme {
-        InventoryScreen()
+        val navController = rememberNavController()
+        InventoryScreen(navController = navController)
     }
 }
 
