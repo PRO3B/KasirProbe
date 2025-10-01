@@ -30,7 +30,7 @@ Aplikasi ini dirancang untuk membantu pencatatan penjualan, pengelolaan produk, 
 ## 📂 Struktur Project (ringkas)
 
 
-KasirProbe/
+- KasirProbe/
 - ├── app/ # Main app module
 - │ └── src/ # Source code (Kotlin, XML, dll)
 - ├── build.gradle.kts # Gradle config
