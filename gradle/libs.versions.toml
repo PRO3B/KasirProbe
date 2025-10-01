@@ -1,13 +1,12 @@
 [versions]
 agp = "8.3.2"
-kotlin = "1.9.23"
+kotlin = "1.9.22"  # UBAH dari 1.9.23 ke 1.9.22
 coreKtx = "1.12.0"
 lifecycleRuntimeKtx = "2.6.2"
 activityCompose = "1.8.2"
 composeBom = "2024.01.00"
 coil = "2.6.0"
 navigationCompose = "2.7.6"
-firebaseBom = "32.7.2"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -34,12 +33,6 @@ androidx-compose-material-icons-extended = { module = "androidx.compose.material
 # Navigation & Image Loading
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 coil-kt = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-
-# Firebase BOM
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
-firebase-auth = { module = "com.google.firebase:firebase-auth-ktx" }
-firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
 # Debug
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
