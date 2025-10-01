@@ -183,7 +183,7 @@ fun NotificationIcon(
 ) {
     Box(
         modifier = modifier.size(28.dp),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Cente
     ) {
         Icon(
             imageVector = Icons.Default.Notifications,
