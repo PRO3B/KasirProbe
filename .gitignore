@@ -31,6 +31,7 @@ local.properties
 
 # Kotlin specific
 *.kotlin_module
+.kotlin/
 
 # Log & temp files
 *.log
