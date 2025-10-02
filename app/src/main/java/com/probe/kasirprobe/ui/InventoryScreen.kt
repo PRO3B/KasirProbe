@@ -249,7 +249,7 @@ fun InventoryScreen(navController: NavHostController) {
                         MinimalProductGrid(
                             products = filteredProducts,
                             onProductClick = { product ->
-                                navController.navigate("editProduct/${product.id}")
+                                navController.navigate("productDetail/${product.id}")
                             },
                             modifier = Modifier.weight(1f)
                         )
@@ -257,7 +257,7 @@ fun InventoryScreen(navController: NavHostController) {
                         MinimalProductList(
                             products = filteredProducts,
                             onProductClick = { product ->
-                                navController.navigate("editProduct/${product.id}")
+                                navController.navigate("productDetail/${product.id}")
                             },
                             modifier = Modifier.weight(1f)
                         )
@@ -875,7 +875,7 @@ fun MinimalProductListItem(
                         .background(
                             when {
                                 product.stock <= 0 -> Color(0xFFF44336)
-                                product.stock < 5 -> Color(0xFFFFA000)
+                                product.stock < 5 -> Color(0xFFFFC800)
                                 else -> MaterialTheme.colorScheme.primary
                             }
                         )

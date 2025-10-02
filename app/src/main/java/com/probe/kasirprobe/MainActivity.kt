@@ -15,14 +15,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Category
@@ -37,7 +35,6 @@ import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.MaterialTheme
@@ -62,8 +59,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.probe.kasirprobe.ui.AddProductScreen
+import com.probe.kasirprobe.ui.EditProductScreen
 import com.probe.kasirprobe.ui.InventoryScreen
+import com.probe.kasirprobe.ui.ProductDetailScreen
 import com.probe.kasirprobe.ui.theme.KasirProbeTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -296,6 +296,16 @@ fun NavGraph(navController: NavHostController, modifier: Modifier) {
         navController = navController,
         startDestination = BottomNavItem.Home.route
     ) {
+        composable("productDetail/{productId}") { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId")?.toIntOrNull() ?: 0
+            ProductDetailScreen(navController = navController, productId = productId)
+        }
+
+        composable("editProduct/{productId}") { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId")?.toIntOrNull() ?: 0
+            EditProductScreen(navController = navController, productId = productId)
+        }
+
         composable("addProduct") { AddProductScreen(navController = navController) }
         composable(BottomNavItem.Home.route) { HomeScreen(navController = navController) }
         composable(BottomNavItem.Inventory.route) { InventoryScreen(navController = navController) }
@@ -304,11 +314,9 @@ fun NavGraph(navController: NavHostController, modifier: Modifier) {
         composable(BottomNavItem.Setting.route) { SettingScreen() }
         composable("hutang") { HutangScreen() }
         composable("labarugi") { LabaRugiScreen() }
-        composable("editProduct/{productId}") {
-            Text("Edit Product Screen - Coming Soon")
         }
     }
-}
+
 
 // 🔹 Dummy screens
 @Composable fun PayScreen() { Text("Pay Screen") }
